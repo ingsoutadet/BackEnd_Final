@@ -1,0 +1,11 @@
+### Post:
+POST http://localhost:8080/api/v1/movies/save
+Content-Type: application/json
+
+{
+    "name":"terror3",
+    "genre":"terror3",
+    "urlStream":"terror3.com"
+}
+### GET:
+GET http://localhost:8080/api/v1/catalog/terror
