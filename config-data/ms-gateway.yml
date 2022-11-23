@@ -12,14 +12,14 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: msmovie
-          uri: lb://ms-movie
+        - id: apimovie
+          uri: lb://api-movie
           predicates:
-            - Path=/movie/**
-        - id: mscatalog
-          uri: lb://ms-catalog
+            - Path=/api/v1/movies/**
+        - id: apicatalog
+          uri: lb://api-catalog
           predicates:
-            - Path=/catalog/**
+            - Path=/api/v1/catalog/**
 
 info:
   app:
