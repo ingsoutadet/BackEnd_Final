@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="ms-config-server" />
+        <module name="api-catalog" />
+        <module name="api-movie" />
+        <module name="eurekaServer" />
+        <module name="ms-gateway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-catalog" target="17" />
+      <module name="api-movie" target="17" />
+      <module name="api-movie (1)" target="17" />
+      <module name="eurekaServer" target="19" />
+      <module name="ms-config-server" target="19" />
+      <module name="ms-gateway" target="19" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-catalog" options="-parameters" />
+      <module name="api-movie" options="-parameters" />
+      <module name="api-movie (1)" options="-parameters" />
+      <module name="eurekaServer" options="-parameters" />
+      <module name="ms-config-server" options="-parameters" />
+      <module name="ms-gateway" options="-parameters" />
+    </option>
+  </component>
+</project>
