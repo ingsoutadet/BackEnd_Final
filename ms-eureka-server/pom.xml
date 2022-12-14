@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.dh</groupId>
-	<artifactId>eurekaServer</artifactId>
+	<artifactId>ms-eurekaServer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>eurekaServer</name>
-	<description>eurekaServer</description>
+	<name>ms-eurekaServer</name>
+	<description>ms-eurekaServer</description>
 	<properties>
 		<java.version>19</java.version>
 		<spring-cloud.version>2021.0.5</spring-cloud.version>

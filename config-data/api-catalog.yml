@@ -7,6 +7,46 @@ spring:
   zipkin:
     base-url: http://localhost:9411
     enabled: true
+  data:
+    mongodb:
+      username: usrcatalogmongo
+      password: pwdcatalogmongo
+      database: catalogdevmongo
+      port: 27018
+      host: localhost
+  rabbitmq:
+    username: guest
+    password: guest
+    host: localhost
+    port: 5672
+
+resilience4j.retry:
+  instances:
+    retryMovie:
+      maxAttempts: 3
+      waitDuration: 10s
+      enableExponentialBackoff: true
+      exponentialBackoffMultiplier: 2
+      retryExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.io.IOException
+        -
+resilience4j.circuitbreaker:
+  instances:
+    clientMovie:
+      registerHealthIndicator: true
+      slidingWindowSize: 10
+      permittedNumberOfCallsInHalfOpenState: 3
+      slidingWindowType: TIME_BASED
+      minimumNumberOfCalls: 20
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+
+
+
+
+
 eureka:
   client:
     registerWithEureka: true

@@ -9,22 +9,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import java.util.List;
 
 @FeignClient(name="api-movie")
-public interface MovieServiceClient {
+public interface MovieFeign {
 
 	@GetMapping("/api/v1/movies/{genre}")
-	List<MovieDto> getMovieByGenre(@PathVariable (value = "genre") String genre);
+	List<Movie> getMovieByGenre(@PathVariable (value = "genre") String genre);
 
+	@GetMapping("/api/v1/movies")
+	List<Movie> getAll();
 
 	@Getter
 	@Setter
-	class MovieDto{
-		private Long id;
-
-		private String name;
-
-		private String genre;
-
-		private String urlStream;
+	class Movie{
+		private Long movieId;
+		private String movieName;
+		private String movieGenre;
+		private String movieUrlStream;
 	}
 
 }

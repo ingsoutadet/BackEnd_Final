@@ -1,18 +1,81 @@
 version: '3.3'
 services:
-  mysql:
+  mysql-container:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'movie-dev'
-      MYSQL_USER: 'usr-movie'
-      MYSQL_PASSWORD: 'pwd-movie'
+      MYSQL_DATABASE: 'movie-dev-mysql'
+      MYSQL_USER: 'usr-movie-mysql'
+      MYSQL_PASSWORD: 'pwd-movie-mysql'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
-      - '3306:3306'
+      - '3366:3306'
     expose:
-      # Opens port 3306 on the container
-      - '3306'
+      # Opens port 3366 on the container
+      - '3366'
       # Where our data will be persisted
+    healthcheck:
+      test: ["CMD","usr-movie-mysql","ping","pwd-movie-mysql","--silent"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+  mongo_db-container-serie:
+    image: mongo
+    container_name: mongocontainerserie
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: 'seriedevmongo'
+      MONGO_INITDB_ROOT_USERNAME: 'usrseriemongo'
+      MONGO_INITDB_ROOT_PASSWORD: 'pwdseriemongo'
+    ports:
+      - 27017:27017
+    expose:
+      - 27017
+    volumes:
+      - ./mongo-init-serie.js:/docker-entrypoint-initdb.d/mongo-init-serie.js:ro
+
+  mongo_db-container-catalog:
+    image: mongo
+    container_name: mongocontainercatalog
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: 'catalogdevmongo'
+      MONGO_INITDB_ROOT_USERNAME: 'usrcatalogmongo'
+      MONGO_INITDB_ROOT_PASSWORD: 'pwdcatalogmongo'
+    ports:
+      - 27018:27018
+    expose:
+      - 27018
+    volumes:
+      - ./mongo-init-catalog.js:/docker-entrypoint-initdb.d/mongo-init-catalog.js:ro
+
+  zipkin-container:
+    image: openzipkin/zipkin-slim
+    container_name: zipkin-container
+    environment:
+      - STORAGE_TYPE=mem
+    ports:
+      - 9411:9411
+    expose:
+      - 9411
+    depends_on:
+      - storage-container
+
+  storage-container:
+    image: busybox:1.31.0
+    container_name: storage-container
+
+  rabbitmq-container:
+    image: rabbitmq:3-management
+    container_name: rabbitmq-container
+    hostname: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    expose:
+      - 15672
+      - 5672
+
+
    
