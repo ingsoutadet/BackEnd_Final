@@ -73,6 +73,8 @@ public class CatalogService {
         }).collect(Collectors.toList()));
     }
 
+    //En esta aplicacion, el esquema de resiliencia consiste en realizar 3 intentos y si el sistema continua
+    // dando error, aun podemos emplear el metodo offline para acceder a la base de datos nosql de catalogo.
     public GetNews getNewsOffline(){
         GetNews response = new GetNews();
         var NewsOfSeries = serieRepositoryMongo.findAll().stream().collect(Collectors.toList());
